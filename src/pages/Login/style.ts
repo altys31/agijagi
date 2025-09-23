@@ -5,7 +5,6 @@ import theme from '../../styles/theme';
 export const Container = styled.div(
   () => css`
     position: relative; 
-    width: 360px;
     height: calc(var(--vh) * 100);
     display: flex;
     flex-direction: column;

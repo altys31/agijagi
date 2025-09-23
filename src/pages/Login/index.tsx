@@ -25,8 +25,8 @@ export const Login = () => {
   const navigator = useNavigate();
   const modal = useModal();
 
-  const widthRatio = window.innerWidth / 360;
-  const width = window.innerWidth;
+  const widthRatio = window.innerWidth > 720 ? 1 : window.innerWidth / 360;
+  const width = window.innerWidth > 720 ? 360 : window.innerWidth;
   const height = window.innerHeight;
 
   const handleActivateLogin = () => {
@@ -98,19 +98,19 @@ export const Login = () => {
   return (
     <s.Container>
       <s.Moon
-        width={360}
+        width={width}
         height={height}
-        ratio={360 / 360}
+        ratio={widthRatio}
         level={level}
         loginMode={loginMode}
       >
         <s.PatternContainer>
-          <s.Pattern1 ratio={360 / 360} />
-          <s.Pattern2 ratio={360 / 360} />
-          <s.Pattern3 ratio={360 / 360} />
-          <s.Pattern4 ratio={360 / 360} />
-          <s.Pattern5 ratio={360 / 360} />
-          <s.Pattern6 ratio={360 / 360} />
+          <s.Pattern1 ratio={widthRatio} />
+          <s.Pattern2 ratio={widthRatio} />
+          <s.Pattern3 ratio={widthRatio} />
+          <s.Pattern4 ratio={widthRatio} />
+          <s.Pattern5 ratio={widthRatio} />
+          <s.Pattern6 ratio={widthRatio} />
         </s.PatternContainer>
       </s.Moon>
       <s.Logo src={LogoImg} height={height} loginMode={loginMode} />
