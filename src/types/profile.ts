@@ -1,0 +1,1 @@
+export type ProfileType = 'boy' | 'girl' | 'none';

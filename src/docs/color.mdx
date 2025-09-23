@@ -1,0 +1,114 @@
+import { Meta, Story, Primary, Controls } from '@storybook/blocks';
+
+import colorPalette from '../styles/colorPalette';
+import theme from '../styles/theme';
+
+import { getRgbSum } from '../utils/getRgbSum.ts';
+
+<Meta title="Foundation/Color Palette" />
+
+# theme.color
+
+<div
+  style={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '1.5rem',
+  }}
+>
+  {Object.entries(theme.color).map(([name, colors]) => (
+    <ul style={{ width: '12rem', margin: '0', padding: '0' }}>
+      <li
+        style={{
+          marginBottom: '0.5rem',
+          padding: '1rem',
+          lineHeight: '100%',
+          backgroundColor: colors['500'],
+          color: getRgbSum(colors['500']) > 450 ? '#000' : '#fff',
+          fontSize: '1rem',
+          listStyle: 'none',
+        }}
+      >
+        {name}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '1rem',
+          }}
+        >
+          <span>500</span>
+          <span>{colors['500']}</span>
+        </div>
+      </li>
+      {Object.entries(colors).map(([key, color]) => (
+        <li
+          style={{
+            margin: key === 'A100' ? '0.25rem 0 0 0' : '0',
+            padding: '1rem',
+            lineHeight: '100%',
+            backgroundColor: color,
+            color: getRgbSum(color) > 450 ? '#000' : '#fff',
+            fontSize: '1rem',
+            listStyle: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>{key}</span>
+            <span>{color}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ))}
+</div>
+
+# theme.palette
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+  {Object.entries(colorPalette).map(([name, colors]) => (
+    <ul style={{ width: '12rem', margin: '0', padding: '0' }}>
+      <li
+        style={{
+          marginBottom: '0.5rem',
+          padding: '1rem',
+          lineHeight: '100%',
+          backgroundColor: colors['500'],
+          color: getRgbSum(colors['500']) > 450 ? '#000' : '#fff',
+          fontSize: '1rem',
+          listStyle: 'none',
+        }}
+      >
+        {name}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '1rem',
+          }}
+        >
+          <span>500</span>
+          <span>{colors['500']}</span>
+        </div>
+      </li>
+      {Object.entries(colors).map(([key, color]) => (
+        <li
+          style={{
+            margin: key === 'A100' ? '0.25rem 0 0 0' : '0',
+            padding: '1rem',
+            lineHeight: '100%',
+            backgroundColor: color,
+            color: getRgbSum(color) > 450 ? '#000' : '#fff',
+            fontSize: '1rem',
+            listStyle: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>{key}</span>
+            <span>{color}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ))}
+</div>

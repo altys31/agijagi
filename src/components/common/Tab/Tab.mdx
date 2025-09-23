@@ -1,0 +1,34 @@
+import { Meta, Story, Primary, Controls } from '@storybook/addon-docs/blocks';
+
+import * as Tab from './Tab.stories.tsx';
+
+<Meta of={Tab} />
+
+# Tab
+
+Tab
+
+<Primary />
+
+## Props
+
+<Controls />
+
+## Usage
+
+```typescript
+<Tab
+  selected="1"
+  size="md"
+  onChange={(value) => {
+    console.log(`${value}번 선택`);
+  }}
+>
+  <Tab.Item value="1">1번</Tab.Item>
+  <Tab.Item value="2">2번</Tab.Item>
+  <Tab.Item disabled value="3">
+    비활성화된 3번
+  </Tab.Item>
+  <Tab.Item value="4">4번</Tab.Item>
+</Tab>
+```
