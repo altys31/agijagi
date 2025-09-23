@@ -7,6 +7,7 @@ import useChildStore from '../../../stores/useChlidStore';
 import theme from '../../../styles/theme';
 import Button from '../../common/Button';
 import Typhography from '../../common/Typography';
+import axios from 'axios';
 
 export const ModalBackground = styled.div`
   position: relative;
@@ -36,11 +37,17 @@ export const DeleteBaby = () => {
     const request = {
       childId: childId,
     };
-    deleteChild(request).then((response) => {
-      modal.pop();
-      alert('삭제되었습니다');
-      window.location.href = '/main';
-    });
+    deleteChild(request)
+      .then((response) => {
+        modal.pop();
+        alert('삭제되었습니다');
+        window.location.href = '/main';
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          alert(error.response?.data.message);
+        }
+      });
   };
 
   return (

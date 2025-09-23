@@ -9,6 +9,7 @@ import Button from '../../common/Button';
 import Textfield from '../../common/Textfield';
 import { ValidationState } from '../../common/Textfield/Textfield.types';
 import Typhography from '../../common/Typography';
+import axios from 'axios';
 
 export const ModalBackground = styled.div`
   position: relative;
@@ -76,7 +77,9 @@ export const EditMember = ({ member, handleRender }: EditMemberProps) => {
         handleRender();
       })
       .catch((error) => {
-        console.error(error);
+        if (axios.isAxiosError(error)) {
+          alert(error.response?.data.message);
+        }
       });
   };
 

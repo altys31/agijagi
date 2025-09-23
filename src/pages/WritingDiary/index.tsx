@@ -212,9 +212,15 @@ export const WritingDiary = () => {
           storyId: selectedDiary.id,
         };
 
-        deleteDiary(request).then((response) => {
-          handleDeleteMessageModal();
-        });
+        deleteDiary(request)
+          .then((response) => {
+            handleDeleteMessageModal();
+          })
+          .catch((error) => {
+            if (axios.isAxiosError(error)) {
+              alert(error.response?.data.message);
+            }
+          });
       }
     }
   };

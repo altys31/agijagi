@@ -11,6 +11,9 @@ const today = moment().format('YYYY-MM-DD');
   
 export const handlers = [
   // 로그인 요청 모킹
+
+
+  
   http.post('https://api.password926.site/auth/login', () => {
     return HttpResponse.json({
       data: {
@@ -44,16 +47,6 @@ export const handlers = [
         imageUrl: null,
         authority: "WRITE",
         followerNum: 5,
-      },
-      {
-        childId: 2,
-        name: "아기2",
-        nickname: "다희",
-        gender: "여아",
-        birthday: "2025-02-01",
-        imageUrl: null,
-        authority: "READ",
-        followerNum: 4,
       },
     ]);
   }),
@@ -167,6 +160,7 @@ export const handlers = [
     
 
   // Catch-all 핸들러 (정의되지 않은 요청 처리)
+
   http.all('https://api.password926.site/*', () => {
     return HttpResponse.json(
       {
@@ -175,7 +169,8 @@ export const handlers = [
        },
       { status: 404 },
     );
-  }),
+    }),
+
 ];
 
 export const worker = setupWorker(...handlers);

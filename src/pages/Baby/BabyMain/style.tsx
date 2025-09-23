@@ -63,8 +63,8 @@ export const WriteIconBox = styled.div`
   width: 24px;
   height: 24px;
   padding: 0.75rem;
-  bottom: 10%;
-  right: 39%;
+  bottom: 8%;
+  right: 41.5%;
   background-color: ${theme.color.primary[400]};
   color: #fff;
   border-radius: 50rem;
