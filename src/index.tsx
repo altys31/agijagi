@@ -9,7 +9,6 @@ const startApp = async () => {
     serviceWorker: { url: '/mockServiceWorker.js' },
     onUnhandledRequest: 'warn',
   });
-  // 앱 렌더
 };
 
 startApp();

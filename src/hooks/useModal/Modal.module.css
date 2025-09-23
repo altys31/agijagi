@@ -18,6 +18,23 @@
   }
 }
 
+
+@media (max-width: 768px) {
+  .center-base > div,
+  .bottom-base > div,
+  .alert-base > div {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .center-base > div,
+  .bottom-base > div,
+  .alert-base > div {
+    width: 360px;
+  }
+}
+
 .center-enter {
   opacity: 1;
   transition: all 0.3s ease;
