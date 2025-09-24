@@ -5,7 +5,12 @@ import theme from '../../../styles/theme';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  @media (min-width: 769px) {
+    width: 360px;
+  }
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
   height: calc(var(--vh) * 100);
   background-color: ${theme.color.primary[100]};
 `;

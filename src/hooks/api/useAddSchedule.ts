@@ -24,7 +24,7 @@ const useAddSchedule = () => {
       navigate(-1);
     },
     onError: () => {
-      alert('오류가 발생했어요.');
+      alert('MSW 환경에서는 지원하지 않는 기능입니다.');
     },
   });
 

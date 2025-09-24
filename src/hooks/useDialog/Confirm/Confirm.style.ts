@@ -5,6 +5,9 @@ import CommonButton from '../../../components/common/Button';
 import theme from '../../../styles/theme';
 
 export const Confirm = styled.div`
+  @media (min-width: 769px) {
+    width: 300px;
+  }
   margin: 1rem;
   padding: 1rem;
   border-radius: 0.75rem;

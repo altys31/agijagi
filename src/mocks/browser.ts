@@ -6,8 +6,27 @@ import babyPic2 from '../assets/diary/babyPic2.webp';
 import babyPic3 from '../assets/diary/babyPic3.webp';
 import { start } from 'repl';
 import moment from 'moment';
+import dayjs from 'dayjs';
+import { RecordData, RecordResponse } from '../types/record';
 
 const today = moment().format('YYYY-MM-DD');
+
+const memberData = {
+  data: {
+    memberId: 1,
+    email: "altys31@gmail.com",
+  },
+};
+
+// eslint-disable-next-line prefer-const
+let recordData: RecordData[] = [{
+  type: "식사",
+  latestDateTime: moment().set('hour', 8).set('minute', 30).toISOString(),
+}];
+  
+const recordAdd = (record:RecordData) => {
+  recordData.push(record);  
+}
   
 export const handlers = [
   // 로그인 요청 모킹
@@ -15,12 +34,7 @@ export const handlers = [
 
   
   http.post('https://api.password926.site/auth/login', () => {
-    return HttpResponse.json({
-      data: {
-        memberId: 1,
-        email: "altys31@gmail.com",
-      },
-    });
+    return HttpResponse.json(memberData);
   }),
 
   // 로그아웃 요청 모킹
@@ -52,19 +66,19 @@ export const handlers = [
   }),
 
   http.get('https://api.password926.site/children/1', () => {
-     return HttpResponse.json({
-        childId: 1,
-        name: "김정호",
-        nickname: "귀요미 정호",
-        gender: "남아",
-        birthday: "2024-12-15",
-        imageUrl: null,
-        authority: "WRITE",
-        followerNum: 5,
-      });
+    return HttpResponse.json({
+      childId: 1,
+      name: "김정호",
+      nickname: "귀요미 정호",
+      gender: "남아",
+      birthday: "2024-12-15",
+      imageUrl: null,
+      authority: "WRITE",
+      followerNum: 5,
+    });
   }),
 
-  http.get(`https://api.password926.site/children/${1}/schedules?startDate=${today}&endDate=${today}`, () => { 
+  http.get(`https://api.password926.site/children/${1}/schedules?startDate=${today}&endDate=${today}`, () => {
 
     return HttpResponse.json([{
       id: 1,
@@ -97,8 +111,8 @@ export const handlers = [
         content: "오늘 아가는 아기 침대에서 귀엽게 옹알이하며 놀다가 지쳐버렸어요. 작은 손발을 흔들며 웃는 모습이 너무 사랑스러워 한참을 바라봤답니다. 그렇게 놀던 아기가 이제 포근한 이불 위에서 천사처럼 깊이 잠들었어요. 하루하루가 이렇게 소중하고 감사하네요.",
         createdAt: moment(),
         wroteAt: moment().subtract(2, 'days').toISOString(),
-        mediaUrls: [babyVideo,babyPic2],
-        mediaTypes: ["video","image"],
+        mediaUrls: [babyVideo, babyPic2],
+        mediaTypes: ["video", "image"],
       },
       {
         id: 2,
@@ -110,7 +124,7 @@ export const handlers = [
         mediaUrls: [babyPic1],
         mediaTypes: ["image"],
       },
-           {
+      {
         id: 3,
         childId: 1,
         memberId: 1,
@@ -137,24 +151,38 @@ export const handlers = [
         authority: "READ",
         imageUrl: "https://picsum.photos/200/301.webp",
       },
-              {
+      {
         followerId: 3,
         nickname: "주니",
         authority: "READ",
         imageUrl: "https://picsum.photos/200/302.webp",
       },
-                  {
+      {
         followerId: 4,
         nickname: "정호맘",
         authority: "READ",
         imageUrl: "https://picsum.photos/200/304.webp",
-      },{
+      }, {
         followerId: 5,
         nickname: "🐶🐶",
         authority: "READ",
         imageUrl: "https://picsum.photos/200/305.webp",
       },
     ]);
+  }),
+
+  http.get('https://api.password926.site/children/1/records/latest', () => {
+    return HttpResponse.json(recordData);
+  }),
+
+  http.get(`https://api.password926.site/children/1/records?startDate=${dayjs().subtract(1, 'month').format('YYYY-MM-DD')}&endDate=${dayjs().format('YYYY-MM-DD')}`, () => {
+    return HttpResponse.json(recordData);
+  }),
+
+  http.post('https://api.password926.site/children/1/records', async (req) => {
+    const body = await req.request.json(); 
+    recordAdd(body as RecordData);
+    return HttpResponse.json({}, { status: 200 });
   }),
 
     
