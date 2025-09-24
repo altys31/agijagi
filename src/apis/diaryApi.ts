@@ -37,8 +37,13 @@ export const editDiary = async (request: EditDiaryRequest) => {
 
   request.newMediaList.forEach((file) => {
     formData.append('newMediaList', file);
+    
+    /* msw 전용 코드 */
+    formData.append(`mediaList`, file);
   });
 
+
+ 
   const response = await axiosInstance.patch(
     `/diaries/${request.storyId}`,
     formData

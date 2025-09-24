@@ -21,10 +21,10 @@ import videoIcon from '../../assets/images/diary/videoIcon.jpeg';
 
 const Wrapper = styled.div`
   display: flex;
-  height: 100%;
   flex-direction: column;
   justify-content: center;
-  padding: 0 20px;
+  align-items: start;
+  padding: 20px;
 `;
 
 const TitleWrapper = styled.div`
@@ -33,7 +33,7 @@ const TitleWrapper = styled.div`
   width: 100%;
   max-width: 500px;
   align-items: center;
-  padding: 80px 10px 10px;
+  padding: 0px 10px 10px;
   margin: 0 auto;
 `;
 
@@ -75,10 +75,10 @@ const PeriodField = styled.div`
   gap: 30px;
 
   @media (min-width: 530px) {
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 30px;
+    gap: 30px; */
   }
 `;
 

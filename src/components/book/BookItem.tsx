@@ -110,8 +110,8 @@ const BounceImage = styled.img`
   animation: bounce 2s infinite;
 
   @media (min-width: 700px) {
-    margin-top: 100px;
-    margin-left: 30px;
+    /* margin-top: 100px;
+    margin-left: 30px; */
   }
 
   @keyframes bounce {
@@ -137,7 +137,6 @@ type BookItemProps = {
   onBookSelect: (book: StoryBookDetail | null) => void;
   isSelected: boolean;
 };
-
 
 const BookItem = ({ image, book, onBookSelect, isSelected }: BookItemProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -169,7 +168,7 @@ const BookItem = ({ image, book, onBookSelect, isSelected }: BookItemProps) => {
             {isFlipped && isLifted ? (
               <BookBack>
                 <TitleLabel>{book.title}</TitleLabel>
-                <PageLabel>생성일: {book.createdAt.slice(0,10)}</PageLabel>
+                <PageLabel>생성일: {book.createdAt.slice(0, 10)}</PageLabel>
                 <DateLabel>
                   <CalendarImg />
                   <Typhography
