@@ -8,6 +8,7 @@ import theme from '../../../styles/theme';
 import Button from '../../common/Button';
 import Typhography from '../../common/Typography';
 import axios from 'axios';
+import useDialog from '../../../hooks/useDialog';
 
 export const ModalBackground = styled.div`
   position: relative;
@@ -32,6 +33,7 @@ export const DeleteBaby = () => {
   const navigator = useNavigate();
   const modal = useModal();
   const { childId } = useChildStore();
+  const { alert } = useDialog();
 
   const handleLogout = () => {
     const request = {

@@ -18,6 +18,12 @@ export const ModalBackground = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${theme.color.primary[50]};
+
+  @media (min-width: 769px) {
+    /* 데스크탑 전용 스타일 */
+    width: 360px;
+  }
+
   gap: 1rem;
   margin: 1rem;
   padding: 2.5rem 2rem 2rem 2rem;

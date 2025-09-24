@@ -168,7 +168,7 @@ export const WritingDiary = () => {
     modal.push({
       children: (
         <ModalBackground>
-          <Typhography weight="bold">삭제되었습니다</Typhography>
+          <Typhography weight="bold">삭제 되었습니다</Typhography>
           <Button onClick={modal.pop}>닫기</Button>
         </ModalBackground>
       ),

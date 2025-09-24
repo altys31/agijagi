@@ -13,7 +13,6 @@ const schedules = [{
 
 export const scheduleHandler = [
   http.get(`https://api.password926.site/children/${1}/schedules?startDate=${today}&endDate=${today}`, () => {
-
     return HttpResponse.json(schedules);
   }),
 

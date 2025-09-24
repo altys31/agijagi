@@ -9,6 +9,9 @@ import { join, dirname } from 'path';
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, 'package.json')));
 }
+
+import path from 'path';
+
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
@@ -23,6 +26,6 @@ const config: StorybookConfig = {
     name: getAbsolutePath('@storybook/react-webpack5'),
     options: {},
   },
-  staticDirs: ['..\\public'],
+  staticDirs: [path.resolve(__dirname, '../public')],
 };
 export default config;

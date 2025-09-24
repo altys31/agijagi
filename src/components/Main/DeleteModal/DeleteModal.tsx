@@ -8,6 +8,7 @@ import theme from '../../../styles/theme';
 import Button from '../../common/Button';
 import Textfield from '../../common/Textfield';
 import Typhography from '../../common/Typography';
+import useDialog from '../../../hooks/useDialog';
 
 export const ModalBackground = styled.div`
   position: relative;
@@ -32,6 +33,7 @@ export const DeleteMemberModal = () => {
   const [input, setInput] = useState<string>('');
   const navigator = useNavigate();
   const modal = useModal();
+  const { alert } = useDialog();
 
   const handleDelete = () => {
     deleteUser()
@@ -41,7 +43,7 @@ export const DeleteMemberModal = () => {
         window.location.href = '/login';
       })
       .catch((error) => {
-        console.error(error);
+        alert(error.response?.data.message || '오류가 발생했습니다.');
       });
   };
 
