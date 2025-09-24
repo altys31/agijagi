@@ -111,7 +111,7 @@ http.post('https://api.password926.site/diaries', async (req) => {
   
   diaryData.push(newDiary);
   console.log(newDiary)
-  return HttpResponse.json(newDiary, { status: 201 });
+  return HttpResponse.json(newDiary, { status: 200 });
 }),
 
   http.patch('https://api.password926.site/diaries/:diaryId', async (req) => {
@@ -132,7 +132,7 @@ http.post('https://api.password926.site/diaries', async (req) => {
     };
   
   diaryData.splice(diaryData.findIndex(d => d.id === Number(diaryId)), 1, newDiary);
-  return HttpResponse.json(newDiary, { status: 201 });
+  return HttpResponse.json(newDiary, { status: 200 });
   }),
 
   http.delete('https://api.password926.site/diaries/:diaryId', async (req) => {

@@ -17,7 +17,7 @@ export const childHandler = [
     ]);
   }),
 
-  http.get('https://api.password926.site/children/1', () => {
+  http.get('https://api.password926.site/children/:childId', () => {
     return HttpResponse.json({
       childId: 1,
       name: "김정호",

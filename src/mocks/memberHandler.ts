@@ -8,7 +8,7 @@ const memberData = {
 };
 
 export const memberHandler = [
-    http.get('https://api.password926.site/members/1', () => {
+    http.get('https://api.password926.site/members/:memberId', () => {
     return HttpResponse.json(memberData);
   }),
 ];

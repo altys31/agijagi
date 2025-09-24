@@ -21,7 +21,7 @@ const recordAdd = (record: RecordData) => {
   
 export const handlers = [
 
-  http.get(`https://api.password926.site/children/${1}/followers`, () => {
+  http.get(`https://api.password926.site/children/:childId/followers`, () => {
     return HttpResponse.json([
       {
         followerId: 1,
@@ -56,15 +56,15 @@ export const handlers = [
   }),
 
   // 아기 기록 모킹
-  http.get('https://api.password926.site/children/1/records/latest', () => {
+  http.get('https://api.password926.site/children/:childId/records/latest', () => {
     return HttpResponse.json(recordData);
   }),
 
-  http.get(`https://api.password926.site/children/1/records?startDate=${dayjs().subtract(1, 'month').format('YYYY-MM-DD')}&endDate=${dayjs().format('YYYY-MM-DD')}`, () => {
+  http.get(`https://api.password926.site/children/:childId/records?startDate=${dayjs().subtract(1, 'month').format('YYYY-MM-DD')}&endDate=${dayjs().format('YYYY-MM-DD')}`, () => {
     return HttpResponse.json(recordData);
   }),
 
-  http.post('https://api.password926.site/children/1/records', async (req) => {
+  http.post('https://api.password926.site/children/:childId/records', async (req) => {
     const body = await req.request.json(); 
     recordAdd(body as RecordData);
     return HttpResponse.json({}, { status: 200 });
@@ -75,7 +75,7 @@ export const handlers = [
   //   return HttpResponse.json([]);
   // }),
 
-  http.get('https://api.password926.site/stories?childId=1', () => {
+  http.get('https://api.password926.site/stories?childId=:childId', () => {
     return HttpResponse.json([]);
   }),
 
