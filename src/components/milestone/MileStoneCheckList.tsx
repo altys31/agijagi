@@ -67,7 +67,8 @@ const DevelopmentList = ({
 }: MileStoneProps) => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['milestone', month],
-    queryFn: () => getMilestone(childId, month),
+    // unwrap axios response so `data` is DevelopmentStage[] in the component
+    queryFn: () => getMilestone(childId, month).then((res) => res.data),
   });
 
   if (error) {
@@ -82,9 +83,11 @@ const DevelopmentList = ({
     return selectedMilestones.some((selected) => selected.id === milestone.id);
   };
 
+  // debug log to inspect runtime shape
+  // console.log('milestone data in component', data);
   return (
     <>
-      {data?.data.map((stage) => (
+      {data?.map((stage) => (
         <React.Fragment key={stage.title}>
           {stage.milestones && (
             <CheckContainer>

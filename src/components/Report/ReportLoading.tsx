@@ -22,7 +22,11 @@ const BouncingImage = styled.img`
   animation: bounce 2s infinite;
 
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
       transform: translateY(0);
     }
     40% {
@@ -38,7 +42,6 @@ const LoadingText = styled.span`
   margin-top: 20px;
   font-size: 16px;
 `;
-
 
 function Loading() {
   return (

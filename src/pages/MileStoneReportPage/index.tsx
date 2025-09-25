@@ -182,8 +182,10 @@ const Report = () => {
           {reportData?.currWeight ? (
             <Typhography size="md" color="primary" shade="800">
               {name}(이)의 몸무게가 출생 후 {days}일 동안{' '}
-              {reportData && weight ? reportData.currWeight - weight : 0} kg
-              증가했습니다.
+              {reportData && weight
+                ? (reportData.currWeight - weight).toFixed(1)
+                : 0}
+              kg 증가했습니다.
             </Typhography>
           ) : (
             ''

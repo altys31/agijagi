@@ -90,7 +90,7 @@ export const BabyReportCard = () => {
   const today = moment();
 
   const sortedReportData = reportData.sort((a, b) => {
-    return new Date(a.createAt).getTime() - new Date(b.createAt).getTime();
+    return new Date(b.createAt).getTime() - new Date(a.createAt).getTime();
   });
 
   return (

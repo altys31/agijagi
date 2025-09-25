@@ -5,7 +5,7 @@ interface WriteCommentProps {
   content: string;
 }
 
-interface CommentData {
+export interface CommentData {
   commentId: number;
   parentCommentId: number | null;
   writerId: number;

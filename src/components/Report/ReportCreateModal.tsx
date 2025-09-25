@@ -10,12 +10,14 @@ import { MilestoneDetail } from '../../apis/milestone';
 import { useMutation } from '@tanstack/react-query';
 import { postReport } from '../../apis/report';
 import useModal from '../../hooks/useModal';
+import useDialog from '../../hooks/useDialog';
 
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  align-items: center;
+  width: 360px;
   height: 200px;
   border-radius: 10px;
   background-color: ${theme.color.tertiary[50]};
@@ -76,6 +78,7 @@ const ReportModal = ({
   childId,
 }: ModalProps) => {
   const { pop } = useModal();
+  const { alert } = useDialog();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const { mutate, isPending } = useMutation({
@@ -85,6 +88,10 @@ const ReportModal = ({
       setTimeout(() => {
         navigate('/milestone-report', { state: { reportId: data.data.id } });
       }, 300);
+    },
+    onError() {
+      alert('msw환경에서는 지원하지 않는 기능입니다');
+      setIsLoading(false);
     },
   });
 

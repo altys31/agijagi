@@ -18,8 +18,8 @@ const ReportListWrapper = styled.div`
 
   /* 화면 너비가 700px 이상일 때 */
   @media (min-width: 700px) {
-    grid-template-columns: 1fr 1fr; /* 두 개의 열로 변경 */
-    height: 300px;
+    //grid-template-columns: 1fr 1fr; /* 두 개의 열로 변경 */
+    //height: 300px;
   }
   @media (max-width: 600px) {
     flex-direction: column;

@@ -4,7 +4,7 @@ interface WriteArticleProps {
   data: FormData;
 }
 
-interface ArticleData {
+export interface ArticleData {
   postId: number;
   title: string;
   content: string;

@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import babyVideo from '../assets/diary/babyVideo1.mp4';
-import babyPic1 from '../assets/diary/babyPic1.jpg';
+import babyPic1 from '../assets/diary/babyPic1.webp';
 import babyPic2 from '../assets/diary/babyPic2.webp';
 import babyPic3 from '../assets/diary/babyPic3.webp';
 import moment from "moment";
@@ -8,7 +8,7 @@ import { DiaryResponse } from "../types/diary";
 
 
 // ArrayBuffer를 Data URL로 변환하는 유틸 함수
-const arrayBufferToDataUrl = (buffer: ArrayBuffer, mimeType: string) => {
+export const arrayBufferToDataUrl = (buffer: ArrayBuffer, mimeType: string) => {
   let binary = '';
   const bytes = new Uint8Array(buffer);
   const len = bytes.byteLength;

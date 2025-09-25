@@ -11,6 +11,7 @@ import { deleteUserImage, editUserImage } from '../../../apis/userApi';
 import { deleteChildImage, editChildImage } from '../../../apis/childApi';
 import useChildStore from '../../../stores/useChlidStore';
 import useModal from '../../../hooks/useModal';
+import useDialog from '../../../hooks/useDialog';
 
 export const ModalBackground = styled.div`
   position: relative;
@@ -18,7 +19,7 @@ export const ModalBackground = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70vw;
+  width: 360px;
   height: auto;
   gap: 3rem;
   background-color: ${theme.color.primary[50]};
@@ -78,6 +79,7 @@ export interface EditBabyImageProps {
 
 export const EditBabyImage = () => {
   const [uploadImg, setUploadImg] = useState<File | null>(null);
+  const { alert } = useDialog();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

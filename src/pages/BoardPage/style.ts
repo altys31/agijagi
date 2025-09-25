@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 
 export const Container = styled.div`
-  width: 100vw;
+  width: 360px;
   height: 100vh;
   background-color: ${theme.color.primary[100]};
 `;

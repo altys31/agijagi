@@ -10,6 +10,7 @@ import MileStoneCheck from '../../components/milestone/MileStoneCheck';
 import {
   getChildInfo,
   getHeightWeightInfo,
+  getMilestone,
   MilestoneDetail,
   patchMilestone,
 } from '../../apis/milestone';
