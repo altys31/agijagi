@@ -3,6 +3,7 @@ import babyVideo from '../assets/diary/babyVideo1.mp4';
 import babyPic1 from '../assets/diary/babyPic1.webp';
 import babyPic2 from '../assets/diary/babyPic2.webp';
 import babyPic3 from '../assets/diary/babyPic3.webp';
+import babyPic4 from '../assets/diary/babyPic4.webp';
 import moment from "moment";
 import { DiaryResponse } from "../types/diary";
 
@@ -53,11 +54,11 @@ const handleFormData = async (formData: FormData) => {
 };
 
 
-let idCounter = 4;
+let idCounter = 5;
 
 const diaryData : DiaryResponse[] = [
   {
-    id: 1,
+    id: 4,
     childId: 1,
     memberId: 1,
     content: "오늘 아가는 아기 침대에서 귀엽게 옹알이하며 놀다가 지쳐버렸어요. 작은 손발을 흔들며 웃는 모습이 너무 사랑스러워 한참을 바라봤답니다. 그렇게 놀던 아기가 이제 포근한 이불 위에서 천사처럼 깊이 잠들었어요. 하루하루가 이렇게 소중하고 감사하네요.",
@@ -65,6 +66,16 @@ const diaryData : DiaryResponse[] = [
     wroteAt: moment().subtract(2, 'days').toISOString(),
     mediaUrls: [babyVideo, babyPic2],
     mediaTypes: ["video", "image"],
+  },
+  {
+  id: 3,
+  childId: 1,
+  memberId: 1,
+  content: "오늘 우리 아가가 처음으로 햇살 속을 산책했어요. 바람이 살짝 불 때마다 아가는 작은 요정이 나타난 듯 손을 흔들며 환하게 웃었답니다. 지나가던 나비 한 마리가 아가 옆에 앉아 잠시 놀다 가는 모습이 마치 동화 속 한 장면 같았어요. 이렇게 평범한 순간도 우리에게는 특별한 모험 같네요.",
+  createdAt: moment().toISOString(),
+  wroteAt: moment().subtract(5, 'days').toISOString(),
+  mediaUrls: [babyPic4],
+  mediaTypes: ["image"],
   },
   {
     id: 2,
@@ -77,7 +88,7 @@ const diaryData : DiaryResponse[] = [
     mediaTypes: ["image"],
   },
   {
-    id: 3,
+    id: 1,
     childId: 1,
     memberId: 1,
     content: "오늘 우리 아가가 세상에 태어났어요. 아직 작은 몸으로 인큐베이터 속에 있지만, 힘차게 숨 쉬는 모습이 너무 대견합니다. 이렇게 만나게 되니 그동안의 기다림이 모두 보상받는 느낌이에요. 우리 아가가 앞으로 건강하고 행복하게 자라주길...",

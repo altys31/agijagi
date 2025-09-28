@@ -15,8 +15,8 @@ const Container = styled.div`
 `;
 
 const BouncingImage = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 320px;
+  height: 320px;
   animation: bounce 2s infinite;
 
   @keyframes bounce {

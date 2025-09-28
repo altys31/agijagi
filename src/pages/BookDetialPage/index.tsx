@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   @media (min-width: 700px) {
-    flex-direction: row; /* 가로 모드일 때 가로 정렬 */
+    //flex-direction: row; /* 가로 모드일 때 가로 정렬 */
   }
 `;
 
@@ -30,8 +30,8 @@ const TitleWrapper = styled.div`
   margin: 30px 10px 10px 30px;
 
   @media (min-width: 700px) {
-    position: fixed;
-    width: 38%;
+    //position: fixed;
+    //width: 38%;
   }
 `;
 
@@ -75,9 +75,11 @@ const CarouselWrapper = styled.div`
   }
 
   @media (min-width: 700px) {
+    /*
     padding-top: 40px;
     margin-top: 80px;
     padding-left: 40px;
+   */
   }
 `;
 
@@ -88,10 +90,12 @@ const StoryBookWrapper = styled.div`
   box-sizing: border-box;
 
   @media (min-width: 700px) {
+    /*
     width: 70%;
     height: 100vh;
     padding-top: 30px;
     padding-left: 30px;
+    */
   }
 `;
 

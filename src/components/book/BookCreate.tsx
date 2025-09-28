@@ -18,6 +18,7 @@ import moment from 'moment';
 import { DiaryResponse } from '../../types/diary';
 import { getAllDiaries } from '../../apis/diaryApi';
 import videoIcon from '../../assets/images/diary/videoIcon.jpeg';
+import useDialog from '../../hooks/useDialog';
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ const LoadingWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 80vh;
 `;
 
@@ -213,6 +215,7 @@ const ButtonWrapper = styled.div`
 const BookCreate = () => {
   const navigate = useNavigate();
   const modal = useModal();
+  const dialog = useDialog();
   const [title, setTitle] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
@@ -235,7 +238,7 @@ const BookCreate = () => {
       }, 300);
     },
     onError: (error) => {
-      console.error('동화생성 실패', error);
+      dialog.alert('msw 환경에서는 동화 생성이 불가합니다.');
     },
   });
 

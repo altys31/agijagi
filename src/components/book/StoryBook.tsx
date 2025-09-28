@@ -18,9 +18,11 @@ const BookWrapper = styled.div`
   align-items: center;
 
   @media (min-width: 700px) {
+    /*
     margin: 0 auto;
     width: calc(var(--vh) * 100);
     height: calc(var(--vh) * 100);
+    */
   }
 `;
 
@@ -77,7 +79,7 @@ const PageText = styled.div<{ isFullScreen: boolean }>`
   color: ${theme.color.greyScale[900]};
   background-color: rgba(255, 255, 255, 0.4); // 동화 text 배경 투명도 조절 가능
   font-size: ${({ isFullScreen }) =>
-    isFullScreen ? theme.typography.fontSize.md : theme.typography.fontSize.sm};
+    isFullScreen ? theme.typography.fontSize.xl : '0.5rem'};
 `;
 
 const PageNumber = styled.div`
@@ -88,7 +90,7 @@ const PageNumber = styled.div`
   font-size: ${theme.typography.fontSize.xs};
 
   @media (min-width: 700px) {
-    top: 85%;
+    //top: 85%;
   }
 `;
 
