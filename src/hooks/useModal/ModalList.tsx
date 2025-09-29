@@ -24,17 +24,31 @@ const ModalList = forwardRef<ModalListRef>((_, ref) => {
               continue;
             }
 
+            // capture the id to avoid referencing the changing loop variable later
+            const removeId = modals[i].id;
+
             modals[i].state = 'FADEOUT';
             modals[i].onFadeOutEnd = () => {
-              setModals((modals) =>
-                modals.filter((modal) => {
-                  if (modal === modals[i] && modal.onClose) {
-                    modal.onClose();
+              setModals((currentModals) => {
+                const toCall: (() => void)[] = [];
+                const filtered = currentModals.filter((m) => {
+                  if (m.id === removeId) {
+                    if (m.onClose) toCall.push(m.onClose);
+                    return false;
                   }
+                  return true;
+                });
 
-                  return modal !== modals[i];
-                })
-              );
+                // call onClose callbacks after state update to avoid triggering
+                // navigation or other updates during render
+                if (toCall.length > 0) {
+                  setTimeout(() => {
+                    toCall.forEach((fn) => fn && fn());
+                  }, 0);
+                }
+
+                return filtered;
+              });
             };
 
             setModals([...modals]);

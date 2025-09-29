@@ -73,7 +73,7 @@ const Router = () => {
 
           {/* 로그인 한 사용자만 접근 가능한 라우터 (비로그인 사용자가 접근하면 /login 으로 라우팅) */}
           {/* msw 사용으로 주석처리*/}
-          <Route element={<Authentication authority="MEMBER_ONLY" />}>
+          <Route /*element={<Authentication authority="MEMBER_ONLY" />}*/>
             <Route path="/" element={<Main />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/main" element={<Main />} />

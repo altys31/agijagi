@@ -50,9 +50,10 @@ const Authentication = ({ authority }: AuthenticationProps) => {
       }
       break;
     case 'CHILD_SELECTED_MEMBER_ONLY':
-      if (!memberId) {
-        return <Navigate to="/login" />;
-      }
+      /* msw상 주석처리*/
+      // if (!memberId) {
+      //   return <Navigate to="/login" />;
+      // }
 
       if (!childId) {
         return <Navigate to="/main" />;

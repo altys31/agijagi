@@ -86,6 +86,7 @@ export const FormContainer = styled.div<{ width: number; loginMode: boolean }>(
 export const ModalBackground = styled.div`
   position: relative;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: ${theme.color.primary[50]};

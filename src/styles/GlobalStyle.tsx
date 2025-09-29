@@ -51,13 +51,15 @@ const GlobalStyle = () => {
           #root {
             @media (max-width: 768px) {
               /* 모바일 전용 스타일 */
-              width: 100%;
+              width: 100vw;
+              height: 100vh;
             }
             @media (min-width: 769px) {
               /* 데스크탑 전용 스타일 */
               width: 360px;
+              height: calc(var(--vh) * 100);
             }
-            height: calc(var(--vh) * 100);
+
             margin: 0;
             overflow-x: hidden;
             overflow-y: scroll;

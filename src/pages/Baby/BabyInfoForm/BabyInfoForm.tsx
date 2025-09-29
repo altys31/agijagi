@@ -19,6 +19,7 @@ export const Background = styled.div`
 `;
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -98,6 +99,7 @@ export const BabyInfoForm = () => {
       })
       .catch((error) => {
         console.error(error);
+        navigator('/main');
       });
   };
 

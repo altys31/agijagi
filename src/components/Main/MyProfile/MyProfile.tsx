@@ -77,6 +77,7 @@ export const MenuItem = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.66rem;
+  cursor: pointer;
 `;
 
 export interface MyProfileProps {

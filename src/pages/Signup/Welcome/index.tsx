@@ -35,7 +35,7 @@ export const Introduction = styled.div<{ animationKey: boolean }>(
     align-items: center;
     text-align: center;
     gap: 3vh;
-    transition: transform 1.5s ease-out;
+    transition: transform 1s cubic-bezier(0.11, 0.29, 0.18, 0.98);
     transform: translateX(${props.animationKey ? '0' : '100vw'});
   `
 );
@@ -47,7 +47,7 @@ export const ButtonContainer = styled.div<{ animationKey: boolean }>(
     width: 80%;
     gap: 3vh;
     text-align: center;
-    transition: transform 2s ease-out;
+    transition: transform 0.75s cubic-bezier(0.11, 0.29, 0.18, 0.98);
     transform: translateY(${props.animationKey ? '0' : '100vh'});
   `
 );

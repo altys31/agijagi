@@ -65,7 +65,9 @@ export const DateInputLabel = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  width: 80%;
+  display: flex;
+  justify-content: center;
+  width: 320px;
   transition: background-color 1s;
 `;
 
@@ -79,7 +81,7 @@ export const Container = styled.div<{ width: number; isNext: boolean }>(
     width: 100%;
     height: 100%;
     max-width: 500px;
-    z-index: 10;
+    z-index: 800;
     transition: all 1s;
     transform: translate(${!props.isNext ? 0 : props.width * -1}px, 0);
   `
@@ -207,7 +209,7 @@ export const FirstBabyForm = ({
       </DateInputContainer>
       <ButtonWrapper>
         <Button
-          size="md"
+          size="lg"
           color={isValidated && birthday !== '' ? 'primary' : 'greyScale'}
           style={{ marginTop: '2rem', transition: 'all 0.3s' }}
           fullWidth={true}

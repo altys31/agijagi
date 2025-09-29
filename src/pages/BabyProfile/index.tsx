@@ -7,7 +7,7 @@ import InviteCodeIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import DeleteIcon from '@heroicons/react/24/solid/XCircleIcon';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { getChild } from '../../apis/childApi';
+import { getAllFollowers, getChild } from '../../apis/childApi';
 import { BabyProfileCard } from '../../components/BabyMain/BabyProfileCard/BabyProfileCard';
 import { BabyReportCard } from '../../components/BabyMain/BabyReportCard/BabyReportCard';
 import { DeleteBaby } from '../../components/BabyMain/DeleteBaby/DeleteBaby';
@@ -20,6 +20,7 @@ import useChildStore from '../../stores/useChlidStore';
 import theme from '../../styles/theme';
 import { BabyResponse } from '../../types/user';
 import SchedulePage from '../SchedulePage';
+import { FollowerResponse } from '../../types/child';
 
 export const Container = styled.div`
   display: flex;
@@ -70,6 +71,16 @@ export const BabyProfile = () => {
 
   const modal = useModal();
   const navigator = useNavigate();
+
+  const { data: followers = [] } = useQuery<FollowerResponse[]>({
+    queryKey: ['followers', childId],
+    queryFn: async () => {
+      return await (
+        await getAllFollowers(childId)
+      ).data;
+    },
+  });
+
   const handleEditBabyInfo = () => {
     modal.push({
       children: <EditBabyInfo child={child} />,
@@ -106,7 +117,7 @@ export const BabyProfile = () => {
           패밀리 프로필
         </Typhography>
       </TitleContainer>
-      <BabyProfileCard child={child}></BabyProfileCard>
+      <BabyProfileCard child={child} followers={followers}></BabyProfileCard>
       <BabyReportCard />
       <MenuConatiner>
         <MenuItem onClick={() => navigator('/report')}>

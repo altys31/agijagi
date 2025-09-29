@@ -25,6 +25,15 @@ export const authHandlers = [
     return HttpResponse.json({
     });
   }),
-  
+
+  http.post('https://api.password926.site/members', async (req) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const body = req.request.body as any;
+    console.log('Signup request body:', body);
+    return HttpResponse.json({
+        memberId: 1,
+        email: body.email,
+      }, { status: 201 });
+  }),
 
 ];
