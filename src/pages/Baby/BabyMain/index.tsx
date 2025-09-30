@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllFollowers, getChild } from '../../../apis/childApi';
 import { getAllDiaries } from '../../../apis/diaryApi';
@@ -17,16 +17,22 @@ import { DiaryResponse } from '../../../types/diary';
 import { BabyResponse } from '../../../types/user';
 import * as s from './style';
 import { FollowerResponse } from '../../../types/child';
+import { TimeLineDiaryFetch } from './TimeLineDiary/Fetch';
 
 export const BabyMain = () => {
-  const [fileLists, setFileLists] = useState<File[][]>([]); // 각 diary에 대해 File[] 배열 저장
-  const [isInitialRender, setIsInitialRender] = useState<boolean>(true);
   const [tabMenu, setTabMenu] = useState<string>('1');
   const [renderKey, setRenderKey] = useState<number>(0);
 
   const modal = useModal();
   const navigator = useNavigate();
   const { childId } = useChildStore();
+
+  // Infinite scroll / lazy load for timeline posts
+  const INITIAL_LOAD = 2; // render 2-3 items initially as requested
+  const LOAD_STEP = 2; // how many to load on each scroll
+  const [displayedCount, setDisplayedCount] = useState<number>(INITIAL_LOAD);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const handleTab = (menu: string) => {
     setTabMenu(menu);
@@ -90,6 +96,39 @@ export const BabyMain = () => {
     }
   };
 
+  // 탭 변경 시 또는 다이어리 데이터 변경 시 displayedCount 초기화
+  useEffect(() => {
+    setDisplayedCount(INITIAL_LOAD);
+  }, [diaries, tabMenu]);
+
+  // 뷰포트의 끝에 도달하면 더 많은 게시물을 로드하는 IntersectionObserver 설정
+  useEffect(() => {
+    if (tabMenu !== '1') return; // only active on timeline tab
+    if (diaries.length <= displayedCount) return; // nothing to load
+
+    const el = loadMoreRef.current;
+    if (!el) return;
+
+    if (observerRef.current) observerRef.current.disconnect();
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setDisplayedCount((prev) =>
+              Math.min(prev + LOAD_STEP, diaries.length)
+            );
+          }
+        });
+      },
+      { root: null, rootMargin: '200px', threshold: 0.1 }
+    );
+
+    observerRef.current.observe(el);
+
+    return () => observerRef.current?.disconnect();
+  }, [diaries.length, displayedCount, tabMenu]);
+
   return (
     <>
       <BabyProfileCard child={child} followers={followers} />
@@ -120,18 +159,12 @@ export const BabyMain = () => {
           {sortedDiaries.length > 0 ? (
             <>
               <s.Circle noDiary={sortedDiaries.length < 1} />
-              <s.PostContainer>
-                {sortedDiaries.map((item, index) => (
-                  <TimelineDiary
-                    key={index}
-                    date={moment(item.wroteAt).format('YYYY-MM-DD')}
-                    urlList={item.mediaUrls}
-                    urlType={item.mediaTypes}
-                    DiaryText={item.content}
-                    child={child}
-                  />
-                ))}
-              </s.PostContainer>
+              <TimeLineDiaryFetch
+                sortedDiaries={sortedDiaries}
+                displayedCount={displayedCount}
+                loadMoreRef={loadMoreRef}
+                child={child}
+              />
             </>
           ) : (
             <NoDiary />

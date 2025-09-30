@@ -41,12 +41,6 @@ export const Circle = styled.div<{ noDiary: boolean }>(
   `
 );
 
-export const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
 export const ModalBackground = styled.div`
   position: relative;
   display: flex;
