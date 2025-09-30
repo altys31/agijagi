@@ -100,8 +100,11 @@ const diaryData : DiaryResponse[] = [
 ];
 
 export const diaryHandler = [
-  http.get(`https://api.password926.site/diaries?childId=${1}`, () => {
-    return HttpResponse.json(diaryData);
+  http.get('https://api.password926.site/diaries', (req) => {
+    const url = new URL(req.request.url);
+    const childId = url.searchParams.get('childId');
+    // For simplicity we ignore childId filtering if not provided
+    return HttpResponse.json(diaryData.filter(d => !childId || d.childId === Number(childId)));
   }),
 
 

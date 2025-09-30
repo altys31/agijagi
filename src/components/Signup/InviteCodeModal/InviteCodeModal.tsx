@@ -8,6 +8,7 @@ import { useState } from 'react';
 import useModal from '../../../hooks/useModal';
 import { addFollower } from '../../../apis/childApi';
 import { useNavigate } from 'react-router-dom';
+import useDialog from '../../../hooks/useDialog';
 
 export const Container = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ export const StyledTextfield = styled(Textfield)`
 
 export const InviteCodeModal = () => {
   const [code, setCode] = useState<string>('');
-
+  const dialog = useDialog();
   const modal = useModal();
   const navigator = useNavigate();
 
@@ -50,7 +51,7 @@ export const InviteCodeModal = () => {
         window.location.href = 'main';
       })
       .catch((error) => {
-        console.error(error);
+        dialog.alert('msw환경에서는 지원하지 않습니다.');
       });
   };
 

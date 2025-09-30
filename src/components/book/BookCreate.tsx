@@ -238,7 +238,7 @@ const BookCreate = () => {
       }, 300);
     },
     onError: (error) => {
-      dialog.alert('msw 환경에서는 동화 생성이 불가합니다.');
+      dialog.alert('MSW 환경에서 불가능한 요청입니다.');
     },
   });
 

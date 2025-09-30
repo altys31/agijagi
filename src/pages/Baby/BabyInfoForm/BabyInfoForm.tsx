@@ -11,6 +11,7 @@ import {
 } from '../../../components/Signup/BabyInfo/SecondBabyForm/SecondBabyForm';
 import theme from '../../../styles/theme';
 import { BabyGender } from '../../../types/user';
+import useDialog from '../../../hooks/useDialog';
 
 export const Background = styled.div`
   width: 100%;
@@ -45,8 +46,8 @@ export const BabyInfoForm = () => {
     nickname: false,
   });
   const [isNext, setIsNext] = useState<boolean>(false);
-
   const navigator = useNavigate();
+  const dialog = useDialog();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -98,7 +99,7 @@ export const BabyInfoForm = () => {
         navigator('/main');
       })
       .catch((error) => {
-        console.error(error);
+        dialog.alert(error.response.data.message);
         navigator('/main');
       });
   };

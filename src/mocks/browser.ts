@@ -135,17 +135,39 @@ export const handlers = [
     return HttpResponse.json(recordData);
   }),
 
-  http.get(`https://api.password926.site/children/:childId/records?startDate=${dayjs().subtract(1, 'month').format('YYYY-MM-DD')}&endDate=${dayjs().format('YYYY-MM-DD')}`, () => {
-    return HttpResponse.json(recordData);
+  http.get('https://api.password926.site/children/:childId/records', (req) => {
+    // parse optional startDate/endDate query params and filter records by latestDateTime
+    const url = new URL(req.request.url);
+    const startDate = url.searchParams.get('startDate');
+    const endDate = url.searchParams.get('endDate');
+
+    if (!startDate && !endDate) {
+      return HttpResponse.json(recordData);
+    }
+
+    const start = startDate ? dayjs(startDate).startOf('day') : dayjs().subtract(1, 'month').startOf('day');
+    const end = endDate ? dayjs(endDate).endOf('day') : dayjs().endOf('day');
+
+    const matched = recordData.filter((r) => {
+      const t = dayjs(r.latestDateTime);
+      const tv = t.valueOf();
+      const sv = start.valueOf();
+      const ev = end.valueOf();
+      return tv >= sv && tv <= ev;
+    });
+
+    return HttpResponse.json(matched);
   }),
   
   http.delete('https://api.password926.site/children/:childId/records/:id', (req) => {
     const { id } = req.params;
     const index = recordData.findIndex(r => r.id === Number(id));
+
     if (index !== -1) {
       recordData.splice(index, 1);
       return HttpResponse.json({}, { status: 204 });
     }
+
     return HttpResponse.json({ error: 'Not found' }, { status: 404 });
   }),
 
@@ -155,24 +177,21 @@ export const handlers = [
     return HttpResponse.json({}, { status: 200 });
   }),
 
+  http.get('https://api.password926.site/stories', (req) => {
+    // handle ?childId= query param
+    const url = new URL(req.request.url);
+    const childId = url.searchParams.get('childId');
 
-    
-  // 동화 관련 모킹
-  //  http.get('https://api.password926.site/stories', () => {
-  //   return HttpResponse.json([]);
-  // }),
-
-  http.get('https://api.password926.site/stories?childId=:childId', (req) => {
-    const { childId } = req.params;
-    return HttpResponse.json([{
-      id: 1,
-      childId: childId,
-      title: '햇살 요정과 작은 모험가',
-      startDate: '2025-09-22',
-      endDate: '2025-09-27',
-      createdAt: '2025-09-27T12:00:00Z',
-      coverImageIndex: 3,
-    },
+    return HttpResponse.json([
+      {
+        id: 1,
+        childId: childId ? Number(childId) : 1,
+        title: '햇살 요정과 작은 모험가',
+        startDate: '2025-09-22',
+        endDate: '2025-09-27',
+        createdAt: '2025-09-27T12:00:00Z',
+        coverImageIndex: 3,
+      },
     ]);
   }),
 
@@ -187,7 +206,7 @@ export const handlers = [
     return HttpResponse.json(
       {
         error: 'This request is not mocked',
-        message: "MSW 상으로 아직 구현되지 않거나 불가능한 요청입니다.",
+        message: "MSW 환경에서 불가능한 요청입니다.",
        },
       { status: 404 },
     );
