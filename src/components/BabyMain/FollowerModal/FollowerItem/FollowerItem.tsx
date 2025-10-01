@@ -8,7 +8,8 @@ import Typhography from '../../../common/Typography';
 import defaultImg from '../../../../assets/images/adult.png';
 import Button from '../../../common/Button';
 import { useEffect, useRef, useState } from 'react';
-import { css } from '@emotion/react';
+import SuspenseFallback from '../../../common/SuspenseFallback';
+// css import removed (unused)
 import { Authority, BabyResponse } from '../../../../types/user';
 import { useQuery } from '@tanstack/react-query';
 import useChildStore from '../../../../stores/useChlidStore';
@@ -70,6 +71,14 @@ export const PopupItem = styled.label`
   }
 `;
 
+export const Skeleton = styled.div`
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid ${theme.color.primary[900]};
+`;
+
 export const MenuConatiner = styled.div`
   display: flex;
   justify-content: space-around;
@@ -84,6 +93,7 @@ export interface FollowerItemProps {
 
 export const FollowerItem = ({ member, render }: FollowerItemProps) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [imgLoading, setImgLoading] = useState<boolean>(true);
 
   const { memberId } = useMemberStore();
   const { childId } = useChildStore();
@@ -102,7 +112,7 @@ export const FollowerItem = ({ member, render }: FollowerItemProps) => {
     };
 
     editFollower(request)
-      .then((response) => {
+      .then(() => {
         render();
       })
       .catch((error) => {
@@ -117,7 +127,7 @@ export const FollowerItem = ({ member, render }: FollowerItemProps) => {
     };
 
     deleteFollower(request)
-      .then((response) => {
+      .then(() => {
         render();
       })
       .catch((error) => {
@@ -133,10 +143,26 @@ export const FollowerItem = ({ member, render }: FollowerItemProps) => {
     },
   });
 
+  // reset image loading when image url changes
+  useEffect(() => {
+    setImgLoading(true);
+  }, [member.imageUrl]);
+
   return (
     <Container>
       <ProfileContainer>
-        <ProfileImg src={member.imageUrl ? member.imageUrl : defaultImg} />
+        {/* skeleton while profile image loads */}
+        {imgLoading && (
+          <Skeleton>
+            <SuspenseFallback width="36px" height="36px" />
+          </Skeleton>
+        )}
+        <ProfileImg
+          src={member.imageUrl ? member.imageUrl : defaultImg}
+          onLoad={() => setImgLoading(false)}
+          onError={() => setImgLoading(false)}
+          style={{ visibility: imgLoading ? 'hidden' : 'visible' }}
+        />
         <Typhography size="xl" weight="bold">
           {member.nickname}
         </Typhography>

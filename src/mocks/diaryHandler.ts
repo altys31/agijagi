@@ -103,8 +103,9 @@ export const diaryHandler = [
   http.get('https://api.password926.site/diaries', (req) => {
     const url = new URL(req.request.url);
     const childId = url.searchParams.get('childId');
-    // For simplicity we ignore childId filtering if not provided
-    return HttpResponse.json(diaryData.filter(d => !childId || d.childId === Number(childId)));
+    const result = diaryData.filter(d => !childId || d.childId === Number(childId));
+   
+    return new Promise((resolve) => setTimeout(() => resolve(HttpResponse.json(result)), 500));
   }),
 
 

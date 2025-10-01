@@ -188,8 +188,8 @@ export const handlers = [
         childId: childId ? Number(childId) : 1,
         title: '햇살 요정과 작은 모험가',
         startDate: '2025-09-22',
-        endDate: '2025-09-27',
-        createdAt: '2025-09-27T12:00:00Z',
+        endDate: '2025-10-01',
+        createdAt: '2025-10-01T12:00:00Z',
         coverImageIndex: 3,
       },
     ]);

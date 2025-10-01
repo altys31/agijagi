@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllFollowers, getChild } from '../../../apis/childApi';
 import { getAllDiaries } from '../../../apis/diaryApi';
+import SuspenseFallback from '../../../components/common/SuspenseFallback';
 import videoIcon from '../../../assets/images/diary/videoIcon.jpeg';
 import { BabyProfileCard } from '../../../components/BabyMain/BabyProfileCard/BabyProfileCard';
 import { ScheduleCard } from '../../../components/BabyMain/ScheduleCard/ScheduleCard';
@@ -21,7 +22,7 @@ import { TimeLineDiaryFetch } from './TimeLineDiary/Fetch';
 
 export const BabyMain = () => {
   const [tabMenu, setTabMenu] = useState<string>('1');
-  const [renderKey, setRenderKey] = useState<number>(0);
+  const [renderKey] = useState<number>(0);
 
   const modal = useModal();
   const navigator = useNavigate();
@@ -38,7 +39,11 @@ export const BabyMain = () => {
     setTabMenu(menu);
   };
 
-  const { data: diaries = [] } = useQuery<DiaryResponse[]>({
+  const {
+    data: diaries,
+    isLoading: diariesLoading,
+    isFetching: diariesFetching,
+  } = useQuery<DiaryResponse[]>({
     queryKey: ['diaries', childId],
     queryFn: () => {
       return getAllDiaries(childId);
@@ -54,11 +59,11 @@ export const BabyMain = () => {
     },
   });
 
-  const sortedDiaries = diaries.sort((a, b) => {
-    const dateA = new Date(a.wroteAt).getTime();
-    const dateB = new Date(b.wroteAt).getTime();
-    return dateB - dateA;
-  });
+  const sortedDiaries = (diaries ?? [])
+    .slice()
+    .sort(
+      (a, b) => new Date(b.wroteAt).getTime() - new Date(a.wroteAt).getTime()
+    );
 
   const { data: child } = useQuery<BabyResponse>({
     queryKey: ['child', childId],
@@ -70,7 +75,7 @@ export const BabyMain = () => {
   });
 
   const handleModalDiary = async (selectedDate: string) => {
-    const diaryData = diaries.find(
+    const diaryData = (diaries ?? []).find(
       (item) => moment(item.wroteAt).format('YYYY-MM-DD') === selectedDate
     );
 
@@ -104,7 +109,7 @@ export const BabyMain = () => {
   // 뷰포트의 끝에 도달하면 더 많은 게시물을 로드하는 IntersectionObserver 설정
   useEffect(() => {
     if (tabMenu !== '1') return; // only active on timeline tab
-    if (diaries.length <= displayedCount) return; // nothing to load
+    if ((diaries ?? []).length <= displayedCount) return; // nothing to load
 
     const el = loadMoreRef.current;
     if (!el) return;
@@ -116,7 +121,7 @@ export const BabyMain = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setDisplayedCount((prev) =>
-              Math.min(prev + LOAD_STEP, diaries.length)
+              Math.min(prev + LOAD_STEP, (diaries ?? []).length)
             );
           }
         });
@@ -127,7 +132,7 @@ export const BabyMain = () => {
     observerRef.current.observe(el);
 
     return () => observerRef.current?.disconnect();
-  }, [diaries.length, displayedCount, tabMenu]);
+  }, [(diaries ?? []).length, displayedCount, tabMenu]);
 
   return (
     <>
@@ -156,7 +161,9 @@ export const BabyMain = () => {
 
       {tabMenu === '1' ? (
         <s.TimelineContainer noDiary={sortedDiaries.length < 1}>
-          {sortedDiaries.length > 0 ? (
+          {diariesLoading || diariesFetching ? (
+            <SuspenseFallback height="20rem" />
+          ) : sortedDiaries.length > 0 ? (
             <>
               <s.Circle noDiary={sortedDiaries.length < 1} />
               <TimeLineDiaryFetch
@@ -177,7 +184,7 @@ export const BabyMain = () => {
               locale="kr"
               tileContent={({ date, view }: { date: Date; view: string }) => {
                 const formattedDate = moment(date).format('YYYY-MM-DD');
-                const matchedDate = diaries.find(
+                const matchedDate = (diaries ?? []).find(
                   (item) =>
                     moment(item.wroteAt).format('YYYY-MM-DD') === formattedDate
                 );

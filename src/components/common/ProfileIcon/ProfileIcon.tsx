@@ -13,7 +13,12 @@ interface ProfileIconProps {
   onClick?: () => void;
 }
 
-const ProfileIcon = ({ image, type = 'none', size, onClick = () => {} }: ProfileIconProps) => {
+const ProfileIcon = ({
+  image,
+  type = 'none',
+  size,
+  onClick = () => {},
+}: ProfileIconProps) => {
   const defaultImage: Record<ProfileType, string> = {
     boy: BoyImage,
     girl: GirlImage,
