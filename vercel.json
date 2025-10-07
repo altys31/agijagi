@@ -6,6 +6,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/scripts/mock-server.js" },
+    { "src": "/(.*\\.(?:js|css|ico|json|png|webp|mp4))", "dest": "/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
