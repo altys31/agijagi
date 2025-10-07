@@ -22,6 +22,7 @@ export const authHandlers = [
   }),
 
   http.get('https://api.password926.site/members', () => {
+    console.log("data", memberData);
     return HttpResponse.json({
     });
   }),

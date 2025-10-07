@@ -202,6 +202,22 @@ export const handlers = [
 
   // Catch-all 핸들러 (정의되지 않은 요청 처리)
 
+  // Lightweight ping endpoint used to keep service worker active during dev
+  http.get('https://api.password926.site/__msw_ping', () => {
+    return HttpResponse.json({ ok: true });
+  }),
+
+  // Also handle same-origin relative paths that the app may call (favicon, local ping)
+  http.get('/__msw_ping', () => {
+    return HttpResponse.json({ ok: true });
+  }),
+
+  http.get('/favicon.ico', () => {
+    // respond with 204 no content for favicon to suppress network warnings
+    return HttpResponse.json({}, { status: 204 });
+  }),
+
+
   http.all('https://api.password926.site/*', () => {
     return HttpResponse.json(
       {
