@@ -96,5 +96,6 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "homepage": "."
 }
