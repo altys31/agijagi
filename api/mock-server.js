@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/static-assets', express.static(path.join(__dirname, '..', 'src', 'assets')));
 
 // mock 리소스에 사용할 기본 호스트 (포트는 실행 시 환경변수로 바꿀 수 있음)
-const MOCK_HOST = process.env.MOCK_HOST || 'http://localhost:4000';
+const MOCK_HOST = process.env.MOCK_HOST || 'http://agijagi.vercel.app';
+
+
+
+const assetUrl = (p) => (MOCK_HOST ? `${MOCK_HOST}/static-assets/${p}` : `/static-assets/${p}`);
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -376,7 +380,7 @@ app.delete('/comments/:commentId', (req, res) => {
   return res.status(204).end();
 });
 
-// Catch-all for unknown paths (helps debugging)
+// 정의되지 않은 경로는 404 처리
 app.use((req, res) => {
   return res.status(404).json({ message: 'mocking 환경에서는 지원하지 않습니다.', path: req.path });
 });
@@ -384,8 +388,8 @@ app.use((req, res) => {
 const port = process.env.PORT || 4000;
 
 // vercel serverless 환경에서는 app.listen()을 호출하면 안됨
-// app.listen(port, () => {
-//   console.log(`Mock server listening on http://localhost:${port}`);
+//  app.listen(port, () => {
+//   console.log(`Mock server listening on port ${port}`);
 // });
 
 module.exports = serverless(app);
