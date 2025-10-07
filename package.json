@@ -36,8 +36,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:mock": "node ./scripts/mock-server.js",
-    "start:dev": "node ./scripts/mock-server.js & react-scripts start",
+    "start:mock": "node ./api/mock-server.js",
+    "start:dev": "node ./api/mock-server.js & react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build || true",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
