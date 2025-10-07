@@ -387,9 +387,8 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 4000;
 
-// vercel serverless 환경에서는 app.listen()을 호출하면 안됨
-//  app.listen(port, () => {
-//   console.log(`Mock server listening on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Mock server listening on port ${port}`);
+});
 
 module.exports = serverless(app);
