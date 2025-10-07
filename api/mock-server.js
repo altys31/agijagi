@@ -10,6 +10,12 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Vercel에서 전달되는 요청에 '/api'가 포함될 수 있으므로 안전하게 제거
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api')) req.url = req.url.slice(4) || '/';
+  next();
+});
+
 // mock 서버에서 src/assets 폴더를 정적으로 서빙
 app.use('/static-assets', express.static(path.join(__dirname, '..', 'src', 'assets')));
 
