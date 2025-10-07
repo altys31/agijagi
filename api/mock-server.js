@@ -16,10 +16,6 @@ app.use('/static-assets', express.static(path.join(__dirname, '..', 'src', 'asse
 // mock 리소스에 사용할 기본 호스트 (포트는 실행 시 환경변수로 바꿀 수 있음)
 const MOCK_HOST = process.env.MOCK_HOST || 'http://agijagi.vercel.app';
 
-
-
-const assetUrl = (p) => (MOCK_HOST ? `${MOCK_HOST}/static-assets/${p}` : `/static-assets/${p}`);
-
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 /* 샘플 in-memory 데이터 */
@@ -195,7 +191,6 @@ let comments = [
 
 // Ping and favicon
 app.get('/__msw_ping', (req, res) => res.json({ ok: true }));
-app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // Auth
 app.post('/auth/login', async (req, res) => {
@@ -387,8 +382,8 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 4000;
 
-app.listen(port, () => {
-  console.log(`Mock server listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Mock server listening on port ${port}`);
+// });
 
 module.exports = serverless(app);
