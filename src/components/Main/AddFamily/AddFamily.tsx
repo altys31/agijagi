@@ -53,7 +53,6 @@ export const IconWrapper = styled.div`
 `;
 
 export const AddFamily = () => {
-  const navigator = useNavigate();
   const modal = useModal();
 
   const handleModal = () => {

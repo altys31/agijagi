@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';

@@ -7,7 +7,6 @@ import { useState } from 'react';
 import Button from '../../common/Button';
 import { useNavigate } from 'react-router-dom';
 import Typhography from '../../common/Typography';
-import { deleteUserImage, editUserImage } from '../../../apis/userApi';
 import { deleteChildImage, editChildImage } from '../../../apis/childApi';
 import useChildStore from '../../../stores/useChlidStore';
 import useModal from '../../../hooks/useModal';
@@ -79,7 +78,6 @@ export interface EditBabyImageProps {
 
 export const EditBabyImage = () => {
   const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const { alert } = useDialog();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

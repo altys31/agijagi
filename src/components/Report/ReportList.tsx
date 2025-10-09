@@ -1,12 +1,10 @@
-import { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 import Typhography from '../common/Typography';
 import { useNavigate } from 'react-router-dom';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import ReportCover from '../../assets/images/report/reportcover.png';
-import { useQuery } from '@tanstack/react-query';
-import { getReportList, ReportList } from '../../apis/report';
+import { ReportList } from '../../apis/report';
 
 const ReportListWrapper = styled.div`
   display: grid;
@@ -154,13 +152,7 @@ interface ReportListProps {
   data: ReportList[] | undefined;
 }
 
-const ReportListComponet = ({
-  name,
-  birth,
-  year,
-  childId,
-  data,
-}: ReportListProps) => {
+const ReportListComponet = ({ name, birth, year, data }: ReportListProps) => {
   const navigate = useNavigate();
 
   const onReportSelect = (id: number) => {

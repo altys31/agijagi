@@ -9,8 +9,6 @@ import MileStoneFilter from '../../components/milestone/MileStoneFilter';
 import MileStoneCheck from '../../components/milestone/MileStoneCheck';
 import {
   getChildInfo,
-  getHeightWeightInfo,
-  getMilestone,
   MilestoneDetail,
   patchMilestone,
 } from '../../apis/milestone';

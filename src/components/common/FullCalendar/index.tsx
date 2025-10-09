@@ -1,5 +1,4 @@
 import Calendar from 'react-calendar';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import theme from '../../../styles/theme';
 import moment from 'moment';

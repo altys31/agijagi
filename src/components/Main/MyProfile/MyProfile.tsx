@@ -4,7 +4,6 @@ import EditIcon from '@heroicons/react/24/solid/PencilIcon';
 import PhotoIcon from '@heroicons/react/24/solid/PhotoIcon';
 import BoardIcon from '@heroicons/react/24/solid/ChatBubbleBottomCenterTextIcon';
 import XIcon from '@heroicons/react/24/solid/XCircleIcon';
-import { render } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import defaultImg from '../../../assets/images/adult.png';
 import useModal from '../../../hooks/useModal';
@@ -86,7 +85,6 @@ export interface MyProfileProps {
 }
 export const MyProfile = ({ member, handleRender }: MyProfileProps) => {
   const modal = useModal();
-  const navigator = useNavigate();
 
   const handleEditMember = () => {
     if (member)

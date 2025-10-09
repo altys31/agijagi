@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 import { FaceSmileIcon, CalendarIcon } from '@heroicons/react/24/outline';
@@ -56,7 +55,6 @@ interface FilterProps {
 }
 
 const ReportFilter = ({ gender, createDate }: FilterProps) => {
-
   return (
     <Container>
       <DateContainer>

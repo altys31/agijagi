@@ -2,9 +2,8 @@ import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 import ProfileIcon from '../common/ProfileIcon/ProfileIcon';
 import MileStoneCheckList from './MileStoneCheckList';
-import { HeightWeightInfoProps, MilestoneDetail } from '../../apis/milestone';
+import { MilestoneDetail } from '../../apis/milestone';
 import MileStoneButton from './MileStoneButton';
-import { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;

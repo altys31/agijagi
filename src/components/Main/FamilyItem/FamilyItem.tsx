@@ -65,9 +65,10 @@ export const IconWrapper = styled.div`
   height: 18px;
 `;
 
-export interface FamilyItem {
+export interface FamilyItemProps {
   babyInfo: BabyResponse;
 }
+
 function getDefaultImg(gender: BabyGender) {
   switch (gender) {
     case '남아':
@@ -78,10 +79,10 @@ function getDefaultImg(gender: BabyGender) {
       return defaultNone;
   }
 }
-export const FamilyItem = ({ babyInfo }: FamilyItem) => {
+export const FamilyItem = ({ babyInfo }: FamilyItemProps) => {
   const navigator = useNavigate();
 
-  const { childId, updateChildId } = useChildStore();
+  const { updateChildId } = useChildStore();
 
   return (
     <GridItem

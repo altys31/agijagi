@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import theme from '../../../styles/theme';
 import Typhography from '../../common/Typography';
-import Textfield from '../../common/Textfield';
 import Button from '../../common/Button';
 import { useState } from 'react';
 import XIcon from '@heroicons/react/24/solid/XMarkIcon';

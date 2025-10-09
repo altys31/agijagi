@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { editUserInfo } from '../../../apis/userApi';
 import useModal from '../../../hooks/useModal';
 import theme from '../../../styles/theme';
@@ -62,7 +61,6 @@ export const EditMember = ({ member, handleRender }: EditMemberProps) => {
     nickname: true,
   });
 
-  const navigator = useNavigate();
   const modal = useModal();
 
   const submitEditMember = () => {

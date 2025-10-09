@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import theme from '../../../styles/theme';
 import Typhography from '../../common/Typography';
 import Textfield from '../../common/Textfield';
@@ -7,7 +6,6 @@ import Button from '../../common/Button';
 import { useState } from 'react';
 import useModal from '../../../hooks/useModal';
 import { addFollower } from '../../../apis/childApi';
-import { useNavigate } from 'react-router-dom';
 import useDialog from '../../../hooks/useDialog';
 
 export const Container = styled.div`
@@ -38,7 +36,6 @@ export const InviteCodeModal = () => {
   const [code, setCode] = useState<string>('');
   const dialog = useDialog();
   const modal = useModal();
-  const navigator = useNavigate();
 
   const submitInviteCode = () => {
     const request = {

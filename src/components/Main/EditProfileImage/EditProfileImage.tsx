@@ -1,14 +1,12 @@
 import styled from '@emotion/styled';
 import theme from '../../../styles/theme';
 import PlusCircle from '@heroicons/react/24/outline/PlusCircleIcon';
-import { MemberResponse } from '../../../types/user';
 import defaultImg from '../../../assets/images/adult.png';
 import { useState } from 'react';
 import Button from '../../common/Button';
 import { useNavigate } from 'react-router-dom';
 import Typhography from '../../common/Typography';
 import { deleteUserImage, editUserImage } from '../../../apis/userApi';
-import { error } from 'console';
 import useModal from '../../../hooks/useModal';
 
 export const ModalBackground = styled.div`
@@ -76,7 +74,6 @@ export interface EditProfileImageProps {
 }
 export const EditProfileImage = ({ handleRender }: EditProfileImageProps) => {
   const [uploadImg, setUploadImg] = useState<File | null>(null);
-  const navigator = useNavigate();
   const modal = useModal();
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

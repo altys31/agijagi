@@ -8,7 +8,7 @@ import { BookCoverImg } from './BookCoverImage';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { postStoryBook, StoryBook } from '../../apis/book';
+import { postStoryBook } from '../../apis/book';
 import useChildStore from '../../stores/useChlidStore';
 import BookLoading from '../../components/book/BookLoading';
 import { CalendarIcon } from '@heroicons/react/24/outline';

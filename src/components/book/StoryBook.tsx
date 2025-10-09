@@ -171,7 +171,7 @@ const StoryBook = ({ book, id, onBookSelect }: StoryBookProps) => {
   const location = useLocation();
   const storyId = id || location.state.storyId;
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [_, setCurrentPage] = useState(0);
   const [warning, setWarning] = useState<string>('');
 
   const storyBookPagesQuery = useQuery({

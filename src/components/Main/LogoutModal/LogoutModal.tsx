@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
 import { logout } from '../../../apis/authApi';
 import useModal from '../../../hooks/useModal';
 import useMemberStore from '../../../stores/useMemberStore';
@@ -26,7 +25,6 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 export const LogoutModal = () => {
-  const navigator = useNavigate();
   const modal = useModal();
   const { updateMemberId } = useMemberStore();
 

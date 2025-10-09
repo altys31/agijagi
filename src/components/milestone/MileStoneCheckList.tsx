@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { getMilestone, MilestoneDetail } from '../../apis/milestone';
 import CheckImg from '../../assets/images/milestone/check.png';
 import theme from '../../styles/theme';

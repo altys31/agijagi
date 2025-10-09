@@ -67,10 +67,6 @@ export const Welcome = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const closeModal = () => {
-    modal.pop();
-  };
-
   const handleModal = () => {
     modal.push({
       children: <InviteCodeModal />,

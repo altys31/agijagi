@@ -6,9 +6,7 @@ import {
   EditChildImageRequest,
   EditChildInfoRequest,
   EditFollowerRequest,
-  GetFollowerRequest,
   InviteCodeRequest,
-  InviteCodeResponse,
 } from '../types/child';
 import { BabyResponse } from '../types/user';
 import { axiosInstance } from './axiosInstance';

@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../../apis/authApi';
 import { deleteChild } from '../../../apis/childApi';
 import useModal from '../../../hooks/useModal';
 import useChildStore from '../../../stores/useChlidStore';
@@ -30,7 +28,6 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 export const DeleteBaby = () => {
-  const navigator = useNavigate();
   const modal = useModal();
   const { childId } = useChildStore();
   const { alert } = useDialog();

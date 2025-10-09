@@ -1,6 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import theme from '../../../styles/theme';
 import Typhography from '../../common/Typography';
 import Crying from '../../../assets/images/crying.png';
 

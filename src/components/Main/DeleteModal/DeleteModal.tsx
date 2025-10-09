@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../../apis/authApi';
 import { deleteUser } from '../../../apis/userApi';
 import useModal from '../../../hooks/useModal';
 import theme from '../../../styles/theme';
@@ -31,7 +30,6 @@ export const ButtonContainer = styled.div`
 `;
 export const DeleteMemberModal = () => {
   const [input, setInput] = useState<string>('');
-  const navigator = useNavigate();
   const modal = useModal();
   const { alert } = useDialog();
 

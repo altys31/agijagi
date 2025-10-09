@@ -1,5 +1,5 @@
 import BackIcon from '@heroicons/react/24/outline/ChevronLeftIcon';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../apis/authApi';
@@ -21,7 +21,7 @@ export const Login = () => {
   const [loginMode, setLoginMode] = useState<boolean>(false);
   const [isValidated, setIsValidated] = useState<boolean[]>([false, false]);
 
-  const { memberId, updateMemberId } = useMemberStore();
+  const { updateMemberId } = useMemberStore();
   const navigator = useNavigate();
   const modal = useModal();
 

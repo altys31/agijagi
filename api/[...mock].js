@@ -1,3 +1,5 @@
+console.log('mock handler loaded');
+
 const serverless = require('serverless-http');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -10,17 +12,24 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Vercel에서 전달되는 요청에 '/api'가 포함될 수 있으므로 안전하게 제거
+// mock 서버에서 src/assets 폴더를 정적으로 서빙
+app.use('/static-assets', express.static(path.join(__dirname, '..', 'public', 'static-assets')));
+//app.use('/static-assets', express.static(path.join(__dirname, '..', 'src', 'assets')));
+
+// DEBUG: 모든 요청 로깅 (문제 재현시 반드시 켜두세요)
 app.use((req, res, next) => {
-  if (req.url.startsWith('/api')) req.url = req.url.slice(4) || '/';
+  console.log('REQ', new Date().toISOString(), req.method, req.originalUrl || req.url);
+  console.log('path:', req.path);
   next();
 });
 
-// mock 서버에서 src/assets 폴더를 정적으로 서빙
-app.use('/static-assets', express.static(path.join(__dirname, '..', 'src', 'assets')));
+app.get('/', (req, res) => {
+  console.log('DEBUG: root "/" hit');
+  return res.status(200).json({ ok: 'root' });
+});
 
-// mock 리소스에 사용할 기본 호스트 (포트는 실행 시 환경변수로 바꿀 수 있음)
-const MOCK_HOST = process.env.MOCK_HOST || 'http://agijagi.vercel.app';
+// MOCK_HOST는 필요시 절대 URL로 설정(배포 도메인); 기본은 빈 문자열로 상대경로 사용
+const MOCK_HOST = process.env.MOCK_HOST || '';
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -208,6 +217,7 @@ app.post('/auth/logout', (req, res) => res.json({ message: 'Logout successful' }
 // Members
 app.get('/members/:memberId', (req, res) => {
   const { memberId } = req.params;
+  console.log('GET /members/:memberId', memberId);
   if (Number(memberId) === memberData.memberId) return res.json(memberData);
   return res.status(404).json({ error: 'Member not found' });
 });
@@ -386,10 +396,10 @@ app.use((req, res) => {
   return res.status(404).json({ message: 'mocking 환경에서는 지원하지 않습니다.', path: req.path });
 });
 
-const port = process.env.PORT || 4000;
-
 // app.listen(port, () => {
 //   console.log(`Mock server listening on port ${port}`);
 // });
 
-module.exports = serverless(app);
+module.exports = serverless(app, {
+  basePath: '/api', // 또는 공통 prefix를 명시
+});

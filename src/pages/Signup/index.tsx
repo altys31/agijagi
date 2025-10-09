@@ -4,8 +4,6 @@ import { ValidationState } from '../../components/common/Textfield/Textfield.typ
 import { ProfileForm } from '../../components/Signup/ProfileForm/ProfileForm';
 import { UserForm } from '../../components/Signup/UserForm/UserForm';
 import theme from '../../styles/theme';
-import { UserData } from '../../types/user';
-
 export const Container = styled.div`
   position: relative;
   width: 100%;

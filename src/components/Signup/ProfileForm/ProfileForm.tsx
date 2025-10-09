@@ -22,7 +22,7 @@ import {
 import { login } from '../../../apis/authApi';
 import useMemberStore from '../../../stores/useMemberStore';
 
-interface ProfileForm {
+interface ProfileFormProps {
   email: string;
   password: string;
   isNext: boolean;
@@ -46,10 +46,10 @@ export const ProfileForm = ({
   nickname,
   setNickname,
   validationNickname,
-}: ProfileForm) => {
+}: ProfileFormProps) => {
   const width = window.innerWidth;
   const navigator = useNavigate();
-  const { memberId, updateMemberId } = useMemberStore();
+  const { updateMemberId } = useMemberStore();
   const modal = useModal();
 
   const handleSignup = () => {

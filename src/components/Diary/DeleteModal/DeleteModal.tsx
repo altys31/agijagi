@@ -28,7 +28,6 @@ export interface DeleteDiaryProps {
   handleDeleteDiary: () => void;
 }
 export const DeleteDiary = ({ handleDeleteDiary }: DeleteDiaryProps) => {
-  const navigator = useNavigate();
   const modal = useModal();
 
   return (

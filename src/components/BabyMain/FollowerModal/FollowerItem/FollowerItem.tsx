@@ -1,13 +1,10 @@
 import styled from '@emotion/styled';
 import theme from '../../../../styles/theme';
-import {
-  DeleteFollowerRequest,
-  FollowerResponse,
-} from '../../../../types/child';
+import { FollowerResponse } from '../../../../types/child';
 import Typhography from '../../../common/Typography';
 import defaultImg from '../../../../assets/images/adult.png';
 import Button from '../../../common/Button';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SuspenseFallback from '../../../common/SuspenseFallback';
 // css import removed (unused)
 import { Authority, BabyResponse } from '../../../../types/user';

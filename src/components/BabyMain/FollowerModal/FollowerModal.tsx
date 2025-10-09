@@ -1,10 +1,7 @@
 import styled from '@emotion/styled';
 import XIcon from '@heroicons/react/24/solid/XMarkIcon';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getAllFollowers } from '../../../apis/childApi';
 import useModal from '../../../hooks/useModal';
-import useChildStore from '../../../stores/useChlidStore';
 import theme from '../../../styles/theme';
 import { FollowerResponse } from '../../../types/child';
 import Typhography from '../../common/Typography';
@@ -45,7 +42,6 @@ export const FollowerModal = ({
   followers: FollowerResponse[];
 }) => {
   const modal = useModal();
-  const { childId } = useChildStore();
   const [renderKey, setRenderKey] = useState<number>(0);
 
   const handleRenderKey = () => {

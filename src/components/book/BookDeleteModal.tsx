@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import theme from '../../styles/theme';
 import Button from '../common/Button';
 import Typhography from '../common/Typography';
 import { useNavigate } from 'react-router-dom';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { MilestoneDetail } from '../../apis/milestone';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postReport } from '../../apis/report';
 import useModal from '../../hooks/useModal';
 import { deleteStoryBook, StoryBookDetail } from '../../apis/book';
 
@@ -57,7 +54,6 @@ interface ModalProps {
 
 const BookDeleteModal = ({ storyId, onBookSelect, childId }: ModalProps) => {
   const { pop } = useModal();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Typhography from '../../components/common/Typography';
 import theme from '../../styles/theme';
@@ -9,8 +8,8 @@ import ReportTarget from '../../components/Report/ReportTarget';
 import ReportIntro from '../../components/Report/ReportIntro';
 import ReportChart from '../../components/Report/ReportChart';
 import ReportSlide from '../../components/Report/ReportSlide';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { deleteReport, getReport } from '../../apis/report';
+import { useQuery } from '@tanstack/react-query';
+import { getReport } from '../../apis/report';
 import useChildStore from '../../stores/useChlidStore';
 import { getChildInfo } from '../../apis/milestone';
 

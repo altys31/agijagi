@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getAllChildren, getUserInfo } from '../../apis/userApi';
 import Typhography from '../../components/common/Typography';
 import { MyFamily } from '../../components/Main/MyFamily/MyFamily';
@@ -13,9 +12,6 @@ import { Container, TitleContainer } from './style';
 export const Main = () => {
   const [renderKey, setRenderKey] = useState<number>(0);
   const { memberId } = useMemberStore();
-  const navigator = useNavigate();
-
-  const validMemberId = memberId;
   const {
     data: member,
     isLoading,

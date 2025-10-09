@@ -1,4 +1,3 @@
-import PlayIcon from '@heroicons/react/24/solid/PlayIcon';
 import StopIcon from '@heroicons/react/24/solid/StopIcon';
 
 import * as s from './style';

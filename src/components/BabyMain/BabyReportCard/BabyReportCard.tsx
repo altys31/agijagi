@@ -75,11 +75,7 @@ export const BabyReportCard = () => {
   const navigator = useNavigate();
   const { childId } = useChildStore();
 
-  const {
-    data: reportData = [],
-    error,
-    isLoading,
-  } = useQuery<ReportList[]>({
+  const { data: reportData = [] } = useQuery<ReportList[]>({
     queryKey: ['reportlist', childId],
     queryFn: async () => {
       return await (
