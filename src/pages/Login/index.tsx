@@ -132,6 +132,15 @@ export const Login = () => {
         >
           회원가입
         </Button>
+        <Button
+          color="tertiary"
+          fullWidth={true}
+          onClick={() => {
+            navigator('/main');
+          }}
+        >
+          비회원 이용 (체험용)
+        </Button>
       </s.LoginContainer>
 
       <s.FormContainer width={width} loginMode={loginMode}>

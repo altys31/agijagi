@@ -181,15 +181,18 @@ export const handlers = [
     // handle ?childId= query param
     const url = new URL(req.request.url);
     const childId = url.searchParams.get('childId');
+    const thisMonth = dayjs().set('date', 1).format('YYYY-MM-DD');
+    const endData = dayjs().format('YYYY-MM-DD');
+    const createdAt = dayjs().format('YYYY-MM-DDTHH:mm:ss[Z]');
 
     return HttpResponse.json([
       {
         id: 1,
         childId: childId ? Number(childId) : 1,
         title: '햇살 요정과 작은 모험가',
-        startDate: '2025-09-22',
-        endDate: '2025-10-01',
-        createdAt: '2025-10-01T12:00:00Z',
+        startDate: thisMonth,
+        endDate: endData,
+        createdAt: createdAt,
         coverImageIndex: 3,
       },
     ]);
